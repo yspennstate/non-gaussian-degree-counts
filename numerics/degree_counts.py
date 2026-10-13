@@ -3,12 +3,14 @@ Exact computations for the lacunary subcritical offspring law and the first
 stage of the critical construction.
 
 Part A: the subcritical law pi (stages, integrality, moments, the constants
-        nu, sigma^2, a_*, v_* with rigorous tail enclosures).
+        nu, sigma^2, a_*, v_*, and |a_0|, v_0 for the leaves, with rigorous tail
+        enclosures).
 Part B: the exact law of N_1(T_n) at n = n_1 = 256, computed two ways
         (Lukasiewicz-path dynamic programming over the tree itself, and the
         conditioned multinomial formula), and at n = n_2 = 2^32 by the
         conditioned multinomial formula, with the mixture weights and the
-        conditional moments compared to the limit.
+        conditional moments of N_1 and of the number of leaves N_0 compared to
+        the limit.
 Part C: the first stage of the critical construction: the gates at the base
         law Q^(0) = (5/8, 1/4, 1/8), scanned over n = 2^l.
 
@@ -86,6 +88,12 @@ def show(name, lo, hi, dig=34):
 P("")
 show("pi_0   ", pi0_lo, pi0_hi); show("nu     ", nu_lo, nu_hi); show("sigma^2", sig_lo, sig_hi)
 show("a_*    ", a_lo, a_hi); show("v_*    ", v_lo, v_hi)
+# leaves: gamma_0 = Cov(1{xi=0}, xi) = -pi_0 nu, a_0 = gamma_0/sigma^2 < 0, v_0 = pi_0(1-pi_0) - gamma_0^2/sigma^2
+g0_lo, g0_hi = pi0_lo * nu_lo, pi0_hi * nu_hi                     # enclosure of |gamma_0| = pi_0 nu
+a0_lo, a0_hi = g0_lo / sig_hi, g0_hi / sig_lo                     # enclosure of |a_0|
+b0_lo, b0_hi = pi0_hi * (1 - pi0_hi), pi0_lo * (1 - pi0_lo)       # pi_0(1-pi_0), decreasing for pi_0 > 1/2
+v0_lo, v0_hi = b0_lo - g0_hi ** 2 / sig_lo, b0_hi - g0_lo ** 2 / sig_hi
+show("|a_0|  ", a0_lo, a0_hi); show("v_0    ", v0_lo, v0_hi)
 P(f"\nExact: nu = 1 - d_inf, d_1 = {d[1]}, d_2 = {d[2]} (as fractions).")
 P("Moments: E xi^h finite iff h < 4 (rare part sum_r 2 n_r^(h-4) up to bounded factors).")
 
@@ -152,6 +160,9 @@ w = {eps: mp.e ** law1[eps][0][3] for eps in law1}; w0 = mp.e ** lw0
 tot2 = (w[+1] + w[-1] + w0) / 256
 P(f"n = 256, conditioned multinomial formula: P(|T| = 256) = {mp.nstr(tot2, 12)}  (ratio to DP = {mp.nstr(tot2/tot, 20)})")
 P(f"  weights: L^+ atom (N_1 = 47): {mp.nstr(w[+1]/(w[+1]+w[-1]+w0), 12)}, L^- atom (N_1 = 79): {mp.nstr(w[-1]/(w[+1]+w[-1]+w0), 12)}, no atom (N_1 = 255): {mp.nstr(w0/(w[+1]+w[-1]+w0), 6)}")
+z0 = {eps: 256 - 1 - law1[eps][0][0] for eps in (+1, -1)}
+P(f"  leaves on these configurations: N_0 = {z0[+1]}, {z0[-1]}, 1; (N_0 - 256 pi_0)/16 = "
+  f"{mp.nstr((z0[+1] - 256 * pi0) / 16, 8)}, {mp.nstr((z0[-1] - 256 * pi0) / 16, 8)}, {mp.nstr((1 - 256 * pi0) / 16, 8)}")
 
 nn = n[2]
 law2 = multinomial_law(nn, 2)
@@ -177,6 +188,21 @@ for eps in (+1, -1):
     lab = "+" if eps > 0 else "-"
     P(f"  given L^{lab}: mean of (N_1 - n/4)/sqrt n = {mp.nstr(mom[eps][0], 10)}, variance = {mp.nstr(mom[eps][1], 8)}  "
       f"(limit: {'-' if eps>0 else '+'}a_* = {mp.nstr(-eps*fl(a_lo), 10)}, v_* = {mp.nstr(fl(v_lo), 8)})")
+# the leaves: N_0 = a_0 = n - 1 - a_1 - a_2 - a_3 (the stage-2 atom is not a leaf)
+mom0 = {}
+for eps in (+1, -1):
+    rows = law2[eps]
+    m = max(r[3] for r in rows)
+    ws = [mp.e ** (r[3] - m) for r in rows]
+    Z = sum(ws)
+    ys = [(nn - 1 - a1 - a2 - a3 - nn * pi0) / sq for a1, a2, a3, _ in rows]
+    mean = sum(y * wt for y, wt in zip(ys, ws)) / Z
+    var = sum((y - mean) ** 2 * wt for y, wt in zip(ys, ws)) / Z
+    mom0[eps] = (mean, var)
+for eps in (+1, -1):
+    lab = "+" if eps > 0 else "-"
+    P(f"  leaves, given L^{lab}: mean of (N_0 - n pi_0)/sqrt n = {mp.nstr(mom0[eps][0], 10)}, variance = {mp.nstr(mom0[eps][1], 8)}  "
+      f"(limit: {lab}|a_0| = {mp.nstr(eps*fl(a0_lo), 10)}, v_0 = {mp.nstr(fl(v0_lo), 8)})")
 M = Lp[1]; D = mp.mpf(nn) / 3; V = mp.mpf(1)
 P(f"  no-current-atom route: Bernstein bound with D >= n/3, Var <= 1, M = {M}: exp(-{mp.nstr(D**2/(2*(nn*V + M*D/3)), 6)}), against P(|T| = n) = 10^{mp.nstr(mp.log10(tot/nn), 5)}")
 cnt = {}

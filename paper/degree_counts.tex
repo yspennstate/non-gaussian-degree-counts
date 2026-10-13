@@ -38,7 +38,7 @@
 \begin{document}
 
 \begin{abstract}
-Let $T_n$ be a Galton--Watson tree with offspring law $\mu$ conditioned to have $n$ vertices, and let $N_A(T_n)$ be the number of its vertices whose outdegree lies in a set $A$. Th\'evenin proved that when $\mu$ is subcritical with $\mu_k\sim ck^{-\beta}$, $\beta>2$, the centred and normalised counts $(N_A(T_n)-n\mu_A)/\sqrt n$ converge to a Gaussian law of variance $\mu_A(1-\mu_A)$, and conjectured that the same holds for every subcritical law without exponential moment and every critical law with infinite variance. We show that neither extension holds in general. For an explicit subcritical law with finite third moment and no exponential moment, and for a critical law with infinite variance, the normalised number of vertices of outdegree one converges along a sequence of sizes to an equal mixture of two Gaussian laws with different means. In both cases the conditioned tree has a vertex of macroscopic degree, and this degree takes one of two values $2\sqrt n$ apart with probability tending to one half each; the count of the remaining vertices follows. The proofs reduce, through the cycle lemma, to a local limit theorem for independent variables conditioned on their sum. The arithmetic behind the constructions is checked in Lean~4.
+Let $T_n$ be a Galton--Watson tree conditioned to have $n$ vertices and let $N_A(T_n)$ be the number of its vertices whose outdegree lies in $A$. Th\'evenin conjectured that $(N_A(T_n)-n\mu_A)/\sqrt n$ is asymptotically normal with variance $\mu_A(1-\mu_A)$ for every subcritical offspring law $\mu$ without exponential moment and every critical law with infinite variance. We show that the conjecture fails for an explicit subcritical law with finite third moment and for a critical law with infinite variance: along a sequence of sizes the normalised number of vertices of outdegree one converges to an equal mixture of two Gaussian laws with different means. For the subcritical law the same holds for every set $A$ with $0<\mu_A<1$, in particular for the number of leaves. We also prove a joint central limit theorem for the box counts of balls-in-boxes models when the limiting density of balls is below the critical density, and at the critical density under a second moment condition when the number of balls exceeds its critical value by at most $O(\sqrt n)$. These results answer parts of Problems 21.2--21.4 in Janson's survey of simply generated trees.
 \end{abstract}
 
 \maketitle
@@ -47,7 +47,7 @@ Let $T_n$ be a Galton--Watson tree with offspring law $\mu$ conditioned to have 
 
 Let $\mu=(\mu_k)_{k\ge0}$ be a probability distribution on the non-negative integers with $\mu_0>0$ and $\mu_0+\mu_1<1$, and let $\xi$ be a random variable with law $\mu$. A Galton--Watson tree with offspring law $\mu$ is the family tree of a branching process in which every individual has an independent number of children distributed as $\xi$; we regard it as a rooted plane tree. Let $T_n$ denote this tree conditioned to have exactly $n$ vertices, which is defined for every $n$ for which the unconditioned tree has $n$ vertices with positive probability. For $A\subset\Z_{\ge0}$ let $N_A(T_n)$ be the number of vertices of $T_n$ whose outdegree (number of children) belongs to $A$, and write $\mu_A=\sum_{k\in A}\mu_k$ and $N_k=N_{\{k\}}$. The law $\mu$ is critical if $\E\xi=1$ and subcritical if $\E\xi<1$.
 
-The law of large numbers $N_A(T_n)/n\to\mu_A$ holds under no assumption beyond the ones above (Janson \cite[Theorem 7.11]{Janson12}). In the critical case with finite variance, Kolchin \cite[Theorem 2.3.1]{Kolchin} proved that $N_d(T_n)$ is asymptotically normal with variance $\mu_d\big(1-\mu_d-(d-1)^2\mu_d/\sigma^2\big)$, where $\sigma^2=\Var\xi$; see \cite[(20.5)--(20.7)]{Janson12} for this and for the joint version under a third moment. Th\'evenin \cite{Thevenin} proves functional versions of such results, and also treats a subcritical case. In the subcritical case the conditioned tree exhibits condensation: one vertex has outdegree close to $(1-\E\xi)n$, and the rest of the tree looks like a forest of small subcritical trees (Jonsson and Stef\'ansson \cite{JS}, Janson \cite[Section 19]{Janson12}, Kortchemski \cite{Kortchemski}, Abraham and Delmas \cite{AD}). Th\'evenin's Theorem 6.7 in \cite{Thevenin} states that if $\mu$ is subcritical with $\mu_k\sim ck^{-\beta}$ for some $c>0$ and $\beta>2$, then for finite sets $A_1,\dots,A_p$ the vector
+The law of large numbers $N_A(T_n)/n\to\mu_A$ holds under no assumption beyond the ones above (Janson \cite[Theorem 7.11]{Janson12}). In the critical case with finite variance, Kolchin \cite[Theorem 2.3.1]{Kolchin} proved that $N_d(T_n)$ is asymptotically normal with variance $\mu_d\big(1-\mu_d-(d-1)^2\mu_d/\sigma^2\big)$, where $\sigma^2=\Var\xi$; see \cite[(21.5)--(21.7)]{Janson12} for this and for the joint version under a third moment, and Janson \cite[Example 2.2]{Janson16} for the joint version under finite variance alone. Th\'evenin \cite{Thevenin} proves functional versions of such results, and also treats a subcritical case. In the subcritical case the conditioned tree exhibits condensation: one vertex has outdegree close to $(1-\E\xi)n$, and the rest of the tree looks like a forest of small subcritical trees (Jonsson and Stef\'ansson \cite{JS}, Janson \cite[Section 19]{Janson12}, Kortchemski \cite{Kortchemski}, Abraham and Delmas \cite{AD}). Th\'evenin's Theorem 6.7 in \cite{Thevenin} states that if $\mu$ is subcritical with $\mu_k\sim ck^{-\beta}$ for some $c>0$ and $\beta>2$, then for finite sets $A_1,\dots,A_p$ the vector
 \[
 \Big(\frac{N_{A_i}(T_n)-n\mu_{A_i}}{\sqrt n}\Big)_{1\le i\le p}
 \]
@@ -60,9 +60,9 @@ converges in distribution to a centred Gaussian vector with covariances $\mu_{A_
 \]
 \end{quote}
 
-The conjecture is preceded in \cite{Thevenin} by the observation that its conclusions are already known for critical $\mu$ in the domain of attraction of a stable law and for subcritical power laws; what is at issue is the step beyond those classes. A closely related question is Problem 20.2 of Janson's survey \cite{Janson12}, which asks whether the degree-count central limit theorem holds in the critical case without moment conditions, whether it extends to the critical case with infinite variance, and what happens in the subcritical case.
+The conjecture is preceded in \cite{Thevenin} by the observation that its conclusions are already known for critical $\mu$ in the domain of attraction of a stable law and for subcritical power laws; what is at issue is the step beyond those classes. Closely related questions are Problems 21.2--21.4 of Janson's survey \cite{Janson12}. Problem 21.2 asks whether the refinements of the degree-count central limit theorem that are proved under extra moment conditions hold for critical laws with finite variance alone, whether the results extend to critical laws with infinite variance, and what happens in the condensation case $0\le\nu<1$, which contains every subcritical law without exponential moment ($\nu$ is recalled before \cref{thm:bb}); Problem 21.3 asks for the same results for the box counts of balls-in-boxes models, and Problem 21.4 for the fringe subtree counts, that is, the numbers of vertices whose subtree is a given tree.
 
-We show that the conjecture fails, for the set $A=\{1\}$, for an explicit subcritical law and for a critical law with infinite variance. In both examples the limit exists along a sequence of sizes and is an equal mixture of two Gaussian laws with means of opposite sign.
+We show that the conjecture fails for an explicit subcritical law and for a critical law with infinite variance. In both examples the normalised number of vertices of outdegree one converges along a sequence of sizes to an equal mixture of two Gaussian laws with means of opposite sign, and for the subcritical example the same is true for $N_A$ with any $A$ such that $0<\mu_A<1$, in particular for the number of leaves.
 
 \begin{theorem}\label{thm:sub}
 Let $q=1/4$, $n_1=256$, $n_{r+1}=n_r^4$, $d_0=3/4$, and for $r\ge1$
@@ -101,7 +101,45 @@ The mechanism is the same in both theorems. Let $\xi_1,\dots,\xi_n$ be independe
 
 In Th\'evenin's theorem the law of the large outdegree is spread over a window of width of order $\sqrt n$ with slowly varying weights $\mu_k\sim ck^{-\beta}$, so conditioning on it does not constrain the sum of the small coordinates, and the count of ones keeps its full variance $\mu_A(1-\mu_A)$. This is the step on which the proof of Theorem 6.7 of \cite{Thevenin} rests: for a subexponential law, the outdegrees other than the largest are asymptotically independent with law $\mu$ (Armend\'ariz and Loulakis \cite{AL}; see also \cite[Section 19]{Janson12}). For the laws below that description fails, because the largest outdegree can absorb only two values and the others remain conditioned on their sum. The counterexamples are lacunary: the offspring law places its mass above $1$ on a sparse set of integers, so that at the sizes $n_r$ the large outdegree can only take two values. Theorem 6.7 of \cite{Thevenin} is not affected. The examples show that the conjecture needs a regularity assumption on the tail of $\mu$, and \cref{sec:remarks} formulates the version that the argument suggests.
 
-The paper is organised as follows. \Cref{sec:prelim} records the cycle lemma and a conditional local limit theorem for triangular arrays, proved by Fourier inversion. \Cref{sec:sub} proves \cref{thm:sub} and \cref{sec:crit} proves \cref{thm:crit}. \Cref{sec:num} reports exact computations of the law of $N_1(T_n)$ for the law of \cref{thm:sub} at $n=256$ and $n=2^{32}$, and of the first stage of the construction of \cref{thm:crit}. The arithmetic facts used in the constructions (the atoms of the first two stages, the bounds on $d_r$ and on the rare mass, the exclusion of a second large coordinate, the exact centering identity, the Bernstein exponent, the mean increments of the critical law and its first-stage atoms) are proved in Lean~4 with Mathlib; the file and its build log are in the repository named at the end.
+The mechanism does not depend on the set $A$. Given the sign of the large coordinate, every count $N_A$ is a sum of a bounded function of the small coordinates conditioned on their sum, and its conditional mean moves with the sign unless $\Ind_A(\xi)$ is uncorrelated with $\xi$. For the subcritical law this gives the following.
+
+\begin{corollary}\label{cor:sub}
+Let $\pi$, $\xi$, $\nu$, $\sigma^2$ and $(n_r)$ be as in \cref{thm:sub}, and let $A\subset\Z_{\ge0}$ with $0<\pi_A<1$. Put
+\[
+\gamma_A=\Cov\big(\Ind_A(\xi),\xi\big),\qquad a_A=\frac{\gamma_A}{\sigma^2},\qquad v_A=\pi_A(1-\pi_A)-\frac{\gamma_A^2}{\sigma^2}.
+\]
+Then $a_A\ne0$, $v_A>0$, and, as $r\to\infty$,
+\[
+\frac{N_A(T_{n_r})-n_r\pi_A}{\sqrt{n_r}}\ \xrightarrow{d}\ \tfrac12\Nor(-a_A,v_A)+\tfrac12\Nor(a_A,v_A).
+\]
+In particular the limit is not Gaussian.
+\end{corollary}
+
+For $A=\{1\}$ this is \cref{thm:sub}(ii), with $a_{\{1\}}=a_*$ and $v_{\{1\}}=v_*$. For the leaves, $A=\{0\}$, one has $\gamma_{\{0\}}=-\nu\pi_0$, $a_{\{0\}}=-0.999908\ldots$ and $v_{\{0\}}=1.71054\ldots\times10^{-5}$, so that, as for the vertices of outdegree one, the number of leaves of $T_{n_r}$ concentrates near the two values $n_r\pi_0\pm\sqrt{n_r}$. For this law the conjecture thus fails for every $A$ with $0<\pi_A<1$; when $\pi_A\in\{0,1\}$ both sides are the point mass at $0$.
+
+The tree is a special case of the balls-in-boxes model of \cite[Section 11]{Janson12}, and the local limit theorem behind \cref{thm:sub,thm:crit} also gives the positive side of the picture in that generality. Let $w=(w_k)_{k\ge0}$ be non-negative weights with $w_0>0$ and span one, that is, $\gcd\{k:w_k>0\}=1$. For integers $m\ge0$ and $n\ge1$ the random allocation $B_{m,n}=(y_1,\dots,y_n)$ is the random vector of non-negative integers with $\sum_iy_i=m$ whose probabilities are proportional to $\prod_iw_{y_i}$; it is defined when some such vector has positive weight. Let $N_A(B_{m,n})=\#\{i\le n:y_i\in A\}$ be the number of boxes whose number of balls lies in $A$. Let $\Phi(t)=\sum_kw_kt^k$, let $\rho\in[0,\infty]$ be its radius of convergence, and for $t>0$ with $\Phi(t)<\infty$ let $\pi^t$ be the law with $\pi^t_k=w_kt^k/\Phi(t)$. For $0<t<\rho$ the mean of $\pi^t$ is $\Psi(t)=t\Phi'(t)/\Phi(t)$; it increases continuously and strictly, since $\Psi'(t)=\Var(\pi^t)/t>0$, and tends to $0$ as $t\to0$. Let $\nu=\lim_{t\uparrow\rho}\Psi(t)\in(0,\infty]$ if $\rho>0$, and $\nu=0$ if $\rho=0$. If $0<\rho<\infty$ and $\nu<\infty$, then $\Phi(\rho)<\infty$ \cite[Lemma 3.1]{Janson12} and $\pi^\rho$ has mean $\nu$. By \cref{lem:cycle}, $N_A(T_n)$ has the law of $N_A(B_{n-1,n})$ for the weights $w=\mu$; when $\mu$ has no exponential moment, $\rho=1$, $\pi^1=\mu$ and $\nu=\E\xi$, in accordance with the notation of \cref{thm:sub}.
+
+\begin{theorem}\label{thm:bb}
+Let $w$ be as above, let $A_1,\dots,A_p\subset\Z_{\ge0}$, and let $m=m(n)$ be integers with $m/n\to\lambda\in(0,\infty)$. For $0<t\le\rho$ such that $\pi^t$ is defined and has finite variance, and $X$ with law $\pi^t$, let $\Sigma(t)$ be the $p\times p$ matrix with entries
+\[
+\Sigma_{jl}(t)=\pi^t(A_j\cap A_l)-\pi^t(A_j)\,\pi^t(A_l)-\frac{\gamma_j(t)\gamma_l(t)}{\Var X},\qquad\gamma_j(t)=\Cov\big(\Ind_{A_j}(X),X\big).
+\]
+\begin{enumerate}
+\item[(a)] Suppose that $\lambda<\nu$, or that $\lambda=\nu$, $\rho<\infty$, $\Var(\pi^\rho)<\infty$ and $m<n\nu$ for all large $n$. Let $\tau\in(0,\rho]$ be given by $\Psi(\tau)=\lambda$ if $\lambda<\nu$, and $\tau=\rho$ if $\lambda=\nu$, and for large $n$ let $\tau_n\in(0,\rho)$ be given by $\Psi(\tau_n)=m/n$. Then
+\[
+\Big(\frac{N_{A_j}(B_{m,n})-n\,\pi^{\tau_n}(A_j)}{\sqrt n}\Big)_{j\le p}\ \xrightarrow{d}\ \Nor\big(0,\Sigma(\tau)\big).
+\]
+\item[(b)] Suppose that $\lambda=\nu$, $\rho<\infty$, $\Var(\pi^\rho)<\infty$ and $(m-n\nu)/\sqrt n\to a\in\R$. Then
+\[
+\Big(\frac{N_{A_j}(B_{m,n})-n\,\pi^{\rho}(A_j)}{\sqrt n}\Big)_{j\le p}\ \xrightarrow{d}\ \Nor\Big(\Big(\frac{a\,\gamma_j(\rho)}{\Var(\pi^\rho)}\Big)_{j\le p},\ \Sigma(\rho)\Big).
+\]
+\end{enumerate}
+In both cases $B_{m,n}$ is defined for all large $n$.
+\end{theorem}
+
+For $A_1=\{d\}$ and $m=n-1$ the variance $\Sigma_{11}$ is Kolchin's $\pi_d\big(1-\pi_d-(d-1)^2\pi_d/\sigma^2\big)$. Part (a) with $\lambda<\nu$ is contained in Janson's conditional limit theorems \cite[Corollaries 2.1 and 2.2]{Janson01}, which also give the convergence of all moments; general conditional limit theorems of this kind go back to Steck, Holst and Kudlaev, see \cite{Janson01} and the references there. For a critical offspring law $\mu$ with finite variance and $w=\mu$, either $\nu=1$, and then $\rho=1$, or $\nu>1$ and $\tau=1<\rho$; so \cref{thm:bb} with $m=n-1$ gives the joint asymptotic normality of the degree counts centred at $n\mu_{A_j}$, by part (b) with $a=0$ in the first case and by part (a) in the second, where $n\pi^{\tau_n}(A_j)-n\mu_{A_j}=O(1)$ because $\Psi$ and $t\mapsto\pi^t(A_j)$ are smooth near $t=1$ and $\Psi'(1)>0$. This is the result of Janson \cite[Example 2.2]{Janson16}. Read as statements about $B_{n-1,n}$, \cref{thm:sub} and \cref{cor:sub} show that the conclusion of \cref{thm:bb} can fail when $\lambda>\nu$, and \cref{thm:crit} that it can fail when $\lambda=\nu$ and $\Var(\pi^\rho)=\infty$. The case $\lambda=\nu$ with $\Var(\pi^\rho)<\infty$ and $(m-n\nu)/\sqrt n\to\infty$ is not covered.
+
+The paper is organised as follows. \Cref{sec:prelim} records the cycle lemma and a conditional local limit theorem for triangular arrays, proved by Fourier inversion. \Cref{sec:sub} proves \cref{thm:sub} and \cref{cor:sub}, \cref{sec:crit} proves \cref{thm:crit}, and \cref{sec:bb} proves \cref{thm:bb}. \Cref{sec:num} reports exact computations for the law of \cref{thm:sub} at $n=256$ and $n=2^{32}$, for $N_1(T_n)$ and for the number of leaves, and for the first stage of the construction of \cref{thm:crit}. The arithmetic facts used in the constructions (the atoms of the first two stages, the bounds on $d_r$ and on the rare mass, the exclusion of a second large coordinate, the exact centering identity, the Bernstein exponent, the mean increments of the critical law and its first-stage atoms) are proved in Lean~4 with Mathlib; the file and its build log are in the repository named at the end.
 
 \section{Preliminaries}\label{sec:prelim}
 
@@ -125,14 +163,14 @@ If $\pi_1>0$ then $\Prob(\Cond_n)\ge\pi_1^{n-1}\pi_0>0$ for every $n$, so $T_n$ 
 
 \subsection{A conditional local limit theorem}
 
-Let $(X_r)_{r\ge1}$ be a sequence of random variables with values in $\Z_{\ge0}$ and let $N_r\to\infty$ be integers. For each $r$ let $X_{r,1},\dots,X_{r,N_r}$ be independent copies of $X_r$ and put
+Let $(X_r)_{r\ge1}$ be a sequence of random variables with values in $\Z_{\ge0}$, let $N_r\to\infty$ be integers, and let $f:\Z_{\ge0}\to\R$ be bounded. For each $r$ let $X_{r,1},\dots,X_{r,N_r}$ be independent copies of $X_r$ and put
 \[
-S_r=\sum_{i\le N_r}X_{r,i},\qquad B_r=\#\{i\le N_r:X_{r,i}=1\}.
+S_r=\sum_{i\le N_r}X_{r,i},\qquad B_r=\sum_{i\le N_r}f(X_{r,i}).
 \]
-Write $\mu_r=\E X_r$, $q_r=\Prob(X_r=1)$.
+Write $\mu_r=\E X_r$, $q_r=\E f(X_r)$. For $f=\Ind_A$, $B_r$ is the number of $i\le N_r$ with $X_{r,i}\in A$.
 
 \begin{lemma}\label{lem:llt}
-Assume that $X_r\to X$ in distribution, that $(X_r^2)_r$ is uniformly integrable, and that $\Prob(X_r=0)\ge c$ and $\Prob(X_r=1)\ge c$ for all $r$ and some $c>0$. Put $\mu=\E X$, $q=\Prob(X=1)$, $\sigma^2=\Var X$, $b=q(1-q)$ and $\gamma=\Cov(\Ind_{\{X=1\}},X)=q(1-\mu)$, and assume $\sigma^2>0$. Let $k_r$ be integers with $(k_r-N_r\mu_r)/\sqrt{N_r}\to a\in\R$. Then
+Assume that $X_r\to X$ in distribution, that $(X_r^2)_r$ is uniformly integrable, and that there are a finite set $F\subset\Z_{\ge0}$ whose differences have greatest common divisor one and a constant $c>0$ such that $\Prob(X_r=x)\ge c$ for every $x\in F$ and all large $r$. Put $\mu=\E X$, $\sigma^2=\Var X$, $b=\Var f(X)$ and $\gamma=\Cov(f(X),X)$. Then $\sigma^2>0$. Let $k_r$ be integers with $(k_r-N_r\mu_r)/\sqrt{N_r}\to a\in\R$. Then
 \begin{equation}\label{eq:llt1}
 \sqrt{N_r}\,\Prob(S_r=k_r)\longrightarrow\frac{e^{-a^2/(2\sigma^2)}}{\sqrt{2\pi\sigma^2}},
 \end{equation}
@@ -140,11 +178,11 @@ and the conditional law of $(B_r-N_rq_r)/\sqrt{N_r}$ given $S_r=k_r$ converges t
 \begin{equation}\label{eq:llt2}
 \Nor\Big(\frac{\gamma a}{\sigma^2},\ b-\frac{\gamma^2}{\sigma^2}\Big).
 \end{equation}
-The variance in \eqref{eq:llt2} is positive unless $\Ind_{\{X=1\}}$ is almost surely an affine function of $X$.
+The variance in \eqref{eq:llt2} is positive unless $f(X)$ is almost surely an affine function of $X$.
 \end{lemma}
 
 \begin{proof}
-Write $N=N_r$, $Y_r=\Ind_{\{X_r=1\}}$, and fix $s\in\R$. Since $S_r$ is integer valued, Fourier inversion gives
+The set $F$ has at least two elements and $\Prob(X=x)=\lim_r\Prob(X_r=x)\ge c$ for $x\in F$, so $\sigma^2>0$. Write $N=N_r$, $Y_r=f(X_r)$, $\|f\|=\sup_x|f(x)|$, and fix $s\in\R$. Since $S_r$ is integer valued, Fourier inversion gives
 \begin{equation}\label{eq:inv}
 \E\Big[e^{is(B_r-Nq_r)/\sqrt N};\,S_r=k_r\Big]
 =\frac1{2\pi}\int_{-\pi}^{\pi}e^{-it(k_r-N\mu_r)}\,\phi_r(t,s)^N\,dt,
@@ -152,23 +190,26 @@ Write $N=N_r$, $Y_r=\Ind_{\{X_r=1\}}$, and fix $s\in\R$. Since $S_r$ is integer 
 where $\phi_r(t,s)=\E\,e^{it(X_r-\mu_r)+is(Y_r-q_r)/\sqrt N}$.
 Substitute $t=v/\sqrt N$ and multiply by $\sqrt N$; the right side becomes $\frac1{2\pi}\int_{|v|\le\pi\sqrt N}e^{-iv(k_r-N\mu_r)/\sqrt N}\phi_r(v/\sqrt N,s)^N\,dv$.
 
-\emph{Pointwise limit.} Put $W_r=v(X_r-\mu_r)+s(Y_r-q_r)$. Then $\E W_r=0$, and $\E W_r^2\to v^2\sigma^2+2vs\gamma+s^2b$, because $X_r\to X$ in distribution with uniformly integrable squares implies convergence of the first and second moments of $(X_r,Y_r)$, the map $x\mapsto\Ind_{\{x=1\}}$ being continuous on the integers. The family $(W_r^2)_r$ is uniformly integrable, so $\E e^{iW_r/\sqrt N}=1-\E W_r^2/(2N)+o(1/N)$: the second-order remainder of $e^{iw}$ at $w=W_r/\sqrt N$ is at most $\min(|w|^3/6,w^2)$, so $N$ times its expectation is at most $K\,\E W_r^2/(6\sqrt N)+\E[W_r^2;|W_r|>K]$, and one lets $K\to\infty$ after $N$. Hence $\phi_r(v/\sqrt N,s)^N\to\exp\{-\tfrac12(\sigma^2v^2+2\gamma vs+bs^2)\}$, and $e^{-iv(k_r-N\mu_r)/\sqrt N}\to e^{-iva}$.
+\emph{Pointwise limit.} Put $W_r=v(X_r-\mu_r)+s(Y_r-q_r)$. Then $\E W_r=0$, and $\E W_r^2\to v^2\sigma^2+2vs\gamma+s^2b$: every function on the integers is continuous, so $(X_r,Y_r)\to(X,f(X))$ in distribution, and $X_r^2$, $X_rY_r$ and $Y_r^2$ are uniformly integrable because $|Y_r|\le\|f\|$, so the first and second moments of $(X_r,Y_r)$ converge. The family $(W_r^2)_r$ is uniformly integrable, so $\E e^{iW_r/\sqrt N}=1-\E W_r^2/(2N)+o(1/N)$: the second-order remainder of $e^{iw}$ at $w=W_r/\sqrt N$ is at most $\min(|w|^3/6,w^2)$, so $N$ times its expectation is at most $K\,\E W_r^2/(6\sqrt N)+\E[W_r^2;|W_r|>K]$, and one lets $K\to\infty$ after $N$. Hence $\phi_r(v/\sqrt N,s)^N\to\exp\{-\tfrac12(\sigma^2v^2+2\gamma vs+bs^2)\}$, and $e^{-iv(k_r-N\mu_r)/\sqrt N}\to e^{-iva}$.
 
-\emph{Domination.} For independent copies $(X_r,Y_r)$, $(X_r',Y_r')$,
-\begin{multline*}
-1-|\phi_r(t,s)|^2=\E\big[1-\cos\big(t(X_r-X_r')+s(Y_r-Y_r')/\sqrt N\big)\big]\\
-\ge2\Prob(X_r=0)\Prob(X_r=1)\big(1-\cos(t+s/\sqrt N)\big),
-\end{multline*}
-keeping only the pairs $(0,1)$ and $(1,0)$, for which $X_r-X_r'=\mp1$ and $Y_r-Y_r'=\mp1$. With $u=t+s/\sqrt N$ this gives $|\phi_r(t,s)|^N\le\exp\{-c^2N(1-\cos u)\}$. Fix $\delta\in(0,1)$ and let $N$ be so large that $|s|/\sqrt N\le\delta$. For $|t|\le\pi-\delta$ we have $|u|\le\pi$, hence $1-\cos u\ge2u^2/\pi^2$, and after the substitution $|\phi_r(v/\sqrt N,s)|^N\le\exp\{-2c^2(v+s)^2/\pi^2\}$, an integrable function of $v$. For $\pi-\delta\le|t|\le\pi$ we have $|u|\ge\pi-2\delta$, so $|\phi_r(t,s)|^N\le\exp\{-c^2N(1-\cos(\pi-2\delta))\}$, and this part of the integral is $O(e^{-c'N})$ even after multiplication by $\sqrt N$. Dominated convergence therefore gives
+\emph{Domination.} Let $(X_r',Y_r')$ be an independent copy of $(X_r,Y_r)$, and put $\alpha=t(X_r-X_r')$ and $\beta=s(Y_r-Y_r')/\sqrt N$. Since $e^{i(\alpha+\beta)}-1=(e^{i\alpha}-1)+e^{i\alpha}(e^{i\beta}-1)$, $|z|^2\le2|z+z'|^2+2|z'|^2$ and $|e^{ix}-1|^2=2(1-\cos x)$, we have $1-\cos(\alpha+\beta)\ge\frac12(1-\cos\alpha)-(1-\cos\beta)$, and therefore
+\[
+1-|\phi_r(t,s)|^2=\E\big[1-\cos(\alpha+\beta)\big]\ge\tfrac12\E[1-\cos\alpha]-\tfrac12\E\beta^2\ge\tfrac12\E[1-\cos\alpha]-\frac{2s^2\|f\|^2}N.
+\]
+Keeping in $\E[1-\cos\alpha]$ only the pairs of values in $F$ gives, for large $r$, $\E[1-\cos\alpha]\ge c^2g(t)$ with $g(t)=\sum_{x,y\in F}\big(1-\cos(t(x-y))\big)$. The function $g$ is continuous and non-negative, and on $[-\pi,\pi]$ it vanishes only at $0$: if $t(x-y)\in2\pi\Z$ for all $x,y\in F$, then $t\in2\pi\Z$, because $1$ is an integer combination of the differences $x-y$. Since $g(t)/t^2\to\frac12\sum_{x,y\in F}(x-y)^2>0$ as $t\to0$, there is $\kappa>0$ with $g(t)\ge\kappa t^2$ for $|t|\le\pi$. Using $|\phi|^2\le\exp\{-(1-|\phi|^2)\}$, we get for $|t|\le\pi$ and large $r$
+\[
+|\phi_r(t,s)|^N\le\exp\Big\{-\frac N2\Big(\frac{c^2\kappa t^2}2-\frac{2s^2\|f\|^2}N\Big)\Big\}=e^{s^2\|f\|^2}e^{-c^2\kappa Nt^2/4},
+\]
+so after the substitution $t=v/\sqrt N$ the integrand is bounded by $e^{s^2\|f\|^2}e^{-c^2\kappa v^2/4}$, an integrable function of $v$. Dominated convergence therefore gives
 \begin{multline*}
 \sqrt N\,\E\Big[e^{is(B_r-Nq_r)/\sqrt N};\,S_r=k_r\Big]
 \longrightarrow\frac1{2\pi}\int_\R e^{-iva}\exp\Big\{-\tfrac12(\sigma^2v^2+2\gamma vs+bs^2)\Big\}dv\\
 =\frac{e^{-a^2/(2\sigma^2)}}{\sqrt{2\pi\sigma^2}}\exp\Big\{i\frac{\gamma a}{\sigma^2}s-\frac12\Big(b-\frac{\gamma^2}{\sigma^2}\Big)s^2\Big\},
 \end{multline*}
-by the Gaussian integral $\int e^{-\sigma^2v^2/2-v(ia+\gamma s)}dv=\sqrt{2\pi/\sigma^2}\,e^{(ia+\gamma s)^2/(2\sigma^2)}$. At $s=0$ this is \eqref{eq:llt1}; dividing by the value at $s=0$ gives the characteristic function of \eqref{eq:llt2}, which proves the convergence of the conditional laws. The variance $b-\gamma^2/\sigma^2=\Var(Y)-\Cov(Y,X)^2/\Var(X)$, $Y=\Ind_{\{X=1\}}$, vanishes exactly when the Cauchy--Schwarz inequality for $(Y-q,X-\mu)$ is an equality, that is, when $Y-q$ is almost surely a multiple of $X-\mu$.
+by the Gaussian integral $\int e^{-\sigma^2v^2/2-v(ia+\gamma s)}dv=\sqrt{2\pi/\sigma^2}\,e^{(ia+\gamma s)^2/(2\sigma^2)}$. At $s=0$ this is \eqref{eq:llt1}; dividing by the value at $s=0$ gives the characteristic function of \eqref{eq:llt2}, which proves the convergence of the conditional laws. The variance $b-\gamma^2/\sigma^2=\Var(Y)-\Cov(Y,X)^2/\Var(X)$, $Y=f(X)$, vanishes exactly when the Cauchy--Schwarz inequality for $(Y-\E Y,X-\mu)$ is an equality, that is, when $Y-\E Y$ is almost surely a multiple of $X-\mu$.
 \end{proof}
 
-The lemma will be used in two ways: with rows $X_r$ that vary with $r$ (\cref{sec:sub}) and with a fixed law and $N\to\infty$ (\cref{sec:crit}); the second is the case $X_r=X$ for all $r$.
+The lemma will be used in two ways: with rows $X_r$ that vary with $r$ (\cref{sec:sub,sec:bb}) and with a fixed law and $N\to\infty$ (\cref{sec:crit,sec:bb}); the second is the case $X_r=X$ for all $r$. It extends to finitely many bounded functions $f_1,\dots,f_p$ by the Cram\'er--Wold device: with $B_r^{(j)}$, $q_r^{(j)}$ and $\gamma_j$ defined from $f_j$, the conditional law of $\big((B_r^{(j)}-N_rq_r^{(j)})/\sqrt{N_r}\big)_{j\le p}$ given $S_r=k_r$ converges to the Gaussian law with means $\gamma_ja/\sigma^2$ and covariances $\Cov(f_j(X),f_l(X))-\gamma_j\gamma_l/\sigma^2$, since for $s\in\R^p$ the lemma applied to $\sum_js_jf_j$ gives the limit law of $\sum_js_j(B_r^{(j)}-N_rq_r^{(j)})/\sqrt{N_r}$.
 
 \subsection{Bernstein's inequality}
 
@@ -225,11 +266,11 @@ k_r^\varepsilon=n-1-L_r^\varepsilon .
 Counting the position of the large coordinate,
 \begin{equation}\label{eq:beta}
 \beta_r^\varepsilon:=\Prob(\Cond,J=1,\text{sign }\varepsilon)=n\,p_r\,z_r^{\,n-1}\,\Prob(R_{r,n-1}=k_r^\varepsilon),
-\qquad
+\quad
 \beta_r^0:=\Prob(\Cond,J=0)=z_r^{\,n}\,\Prob(R_{r,n}=n-1).
 \end{equation}
 
-The rows $X_r$ satisfy the hypotheses of \cref{lem:llt}. Indeed $0<t_r\le4n^{-4}$ and $z_r>3/4$ by \cref{prop:law}(b), so $X_r\to\xi$ in distribution; $\E[X_r^2;X_r>K]\le\tfrac43\E[\xi^2;\xi>K]$ gives uniform integrability; $\Prob(X_r=0)\ge1/2$ and $\Prob(X_r=1)=q/z_r\ge1/4$. The limiting constants are $\mu=\nu$, $\sigma^2=\Var\xi$, $b=q(1-q)$ and $\gamma=q(1-\nu)$. Write
+The rows $X_r$ satisfy the hypotheses of \cref{lem:llt} with $f=\Ind_{\{1\}}$, $F=\{0,1\}$ and $c=1/4$. Indeed $0<t_r\le4n^{-4}$ and $z_r>3/4$ by \cref{prop:law}(b), so $X_r\to\xi$ in distribution; $\E[X_r^2;X_r>K]\le\tfrac43\E[\xi^2;\xi>K]$ gives uniform integrability; $\Prob(X_r=0)\ge1/2$ and $\Prob(X_r=1)=q/z_r\ge1/4$. The limiting constants are $\mu=\nu$, $\sigma^2=\Var\xi$, $b=q(1-q)$ and $\gamma=q(1-\nu)$. Write
 \begin{equation}\label{eq:rowmeans}
 u_r=q+\sum_{s<r}p_s(L_s^-+L_s^+)=1-d_{r-1},\qquad
 \mu_r=\E X_r=\frac{u_r}{z_r},\qquad
@@ -267,9 +308,9 @@ where the last inequality uses $D_r^2\ge n^2/9$ and $2(n+M_rD_r/3)\le\tfrac83nM_
 \end{equation}
 Consequently $\Prob(\Cond)=2C_\sigma n^{-7/2}(1+o(1))$, $\Prob(J=1\mid\Cond)\to1$, and $\Prob(\text{sign }\varepsilon\mid\Cond)\to1/2$ for each sign. By \cref{lem:cycle}, $\Prob(|T|=n_r)=2C_\sigma n_r^{-9/2}(1+o(1))$.
 
-\subsection{Proof of \cref{thm:sub}}
+\subsection{Proof of \texorpdfstring{\cref{thm:sub}}{Theorem 1.1}}
 
-Part (i) is \cref{prop:law} together with the remark after \cref{lem:cycle}.
+Part (i) is \cref{prop:law} and the remark after \cref{lem:cycle}.
 
 For (ii), condition on $\Cond$, $J=1$ and the sign $\varepsilon$. The large coordinate is not equal to one, and the other $n-1$ coordinates are independent copies of $X_r$ conditioned on $R_{r,n-1}=k_r^\varepsilon$; so $\#\{i:\xi_i=1\}$ is the number $B_r$ of ones among them. By \cref{lem:llt} with $a=-\varepsilon$,
 \[
@@ -284,6 +325,16 @@ For (iii), on the event $J=1$ the largest coordinate is $L_r^\varepsilon$, and t
 \begin{remark}
 The mixture \eqref{eq:sublimit} is nearly a two-point law: $v_*$ is small because almost all small coordinates are $0$ or $1$, so that their sum almost determines their number of ones. The variance $v_*$ comes entirely from the atoms of the earlier stages; at $n=n_2$ it is carried by the Poisson-like number of coordinates equal to $176$ or $208$. In the limit the fluctuation of $N_1$ is of order $\sqrt n$ only because the large coordinate itself moves by $2\sqrt n$; this is the opposite of the situation in Th\'evenin's theorem, where the large coordinate is free and the count of ones fluctuates on its own.
 \end{remark}
+
+\subsection{Proof of \texorpdfstring{\cref{cor:sub}}{Corollary 1.3}}
+
+Let $A$ be as in \cref{cor:sub} and let $f=\Ind_A$. The rows $X_r$ satisfy the hypotheses of \cref{lem:llt} with this $f$, $F=\{0,1\}$ and $c=1/4$, as shown above, and the limiting constants are now $b=\pi_A(1-\pi_A)$ and $\gamma=\gamma_A$. Condition on $\Cond$, $J=1$ and the sign $\varepsilon$, and let $B_r$ be the number of the $n-1$ small coordinates that lie in $A$. By \cref{lem:llt} with $a=-\varepsilon$, the conditional law of $(B_r-(n-1)q_r)/\sqrt{n-1}$, where now $q_r=\pi(A\cap\mathcal A_r)/z_r$, converges to $\Nor(-\varepsilon a_A,v_A)$. Since $A\setminus\mathcal A_r$ consists of atoms $L_s^\pm$ with $s\ge r$, $0\le\pi_A-\pi(A\cap\mathcal A_r)\le t_r$, so $q_r-\pi_A=O(t_r)$ and $(n-1)q_r-n\pi_A=O(1)$; and $N_A$ differs from $B_r$ by at most one, the contribution of the large coordinate. The rest of the proof of \cref{thm:sub}(ii) applies unchanged and gives the limit $\tfrac12\Nor(-a_A,v_A)+\tfrac12\Nor(a_A,v_A)$.
+
+Since $\E(\xi-\nu)=0$,
+\[
+\gamma_A=\sum_{k\in A}(k-\nu)\pi_k=-\sum_{k\notin A}(k-\nu)\pi_k,
+\]
+and every atom of $\pi$ other than $0$ is at least $1>\nu$. If $0\notin A$, then $A$ contains an atom because $\pi_A>0$, and every term of the first sum is non-negative and at least one is positive, so $\gamma_A>0$. If $0\in A$, then the complement of $A$ contains an atom because $\pi_A<1$, and the same reasoning applied to the second sum gives $\gamma_A<0$. Thus $a_A\ne0$. If $\Ind_A(\xi)=\alpha+\beta\xi$ almost surely, then evaluating at $\xi=0,1,176$ gives $\alpha,\alpha+\beta,\alpha+176\beta\in\{0,1\}$, which forces $\beta=0$ and $\pi_A\in\{0,1\}$; so $v_A>0$ by \cref{lem:llt}. Finally, the characteristic function $e^{-v_As^2/2}\cos(a_As)$ of the limit vanishes at $s=\pi/(2|a_A|)$, so the limit is not Gaussian. \qed
 
 \section{The critical law}\label{sec:crit}
 
@@ -308,7 +359,7 @@ Let $S_N$ and $B_N$ be the sum and the number of ones of $N$ independent variabl
 \item[(G4)] $\exp\Big\{-\dfrac{(n\Delta_r-1)^2}{2(nV_r+M_r(n\Delta_r-1)/3)}\Big\}<\varepsilon_rw_r(n)$;
 \item[(G5)] $2n^{-6}<\varepsilon_rw_r(n)$.
 \end{enumerate}
-Admissible $n$ exist: \cref{lem:llt} applied to the fixed law $Q^{(r-1)}$ (with $X_r=X$, $N\to\infty$, and $(k_r^\pm(n)-N(1-\Delta_r))/\sqrt N\to\mp V_r/(q\Delta_r)$) shows that $\sqrt N\Prob(S_N=k_r^\pm)\to c_r$ and that the conditional law in (G3) converges weakly to $\Nor(\gamma_ra/V_r,\,b-\gamma_r^2/V_r)$ with $\gamma_r=q\Delta_r$ and $a=\mp V_r/(q\Delta_r)$, that is, to $\Nor(\mp1,v_r)$; weak convergence to a law with continuous distribution function is uniform convergence of distribution functions, so (G2) and (G3) hold for all large $n$. The conditional laws are well defined because $0\le k_r^\pm\le N$ once (G1) holds and $\{0,1\}\subset\supp Q^{(r-1)}$. The exponent in (G4) grows linearly in $n$ while $\varepsilon_rw_r(n)$ decays polynomially, and $n^{-6}/w_r(n)=O(n^{-5/2})$, so (G4) and (G5) hold for all large $n$; (G1) is clear. Let $n_r$ be the least admissible $n$. Then set
+Admissible $n$ exist: \cref{lem:llt} applied to the fixed law $Q^{(r-1)}$ (with $X_r=X$, $N\to\infty$, $f=\Ind_{\{1\}}$, $F=\{0,1\}$, and $(k_r^\pm(n)-N(1-\Delta_r))/\sqrt N\to\mp V_r/(q\Delta_r)$) shows that $\sqrt N\Prob(S_N=k_r^\pm)\to c_r$ and that the conditional law in (G3) converges weakly to $\Nor(\gamma_ra/V_r,\,b-\gamma_r^2/V_r)$ with $\gamma_r=q\Delta_r$ and $a=\mp V_r/(q\Delta_r)$, that is, to $\Nor(\mp1,v_r)$; weak convergence to a law with continuous distribution function is uniform convergence of distribution functions, so (G2) and (G3) hold for all large $n$. The conditional laws are well defined because $0\le k_r^\pm\le N$ once (G1) holds and $\{0,1\}\subset\supp Q^{(r-1)}$. The exponent in (G4) grows linearly in $n$ while $\varepsilon_rw_r(n)$ decays polynomially, and $n^{-6}/w_r(n)=O(n^{-5/2})$, so (G4) and (G5) hold for all large $n$; (G1) is clear. Let $n_r$ be the least admissible $n$. Then set
 \[
 L_r^\pm=L_r^\pm(n_r),\qquad p_r=n_r^{-4},\qquad H_r=n_r^4,\qquad a_r=\frac{\Delta_r/2-p_r(L_r^-+L_r^+)}{H_r},\qquad h_r=2p_r+a_r,
 \]
@@ -330,7 +381,7 @@ $\E\xi=1$; $\E\xi^\alpha=\infty$ for every $\alpha>1$; $\E e^{\theta\xi}=\infty$
 $\E\xi=\tfrac12+\sum_{r\ge1}\Delta_r/2=1$ by monotone convergence. For $\alpha>1$, $a_rH_r^\alpha>\tfrac14\Delta_rn_r^{4(\alpha-1)}=2^{-r-2}n_r^{4(\alpha-1)}$, and $n_r\ge n_{r-1}^4$ gives $\log n_r\ge4^{r-1}\log256$, so these terms tend to infinity. Infinite moments of every order above one exclude exponential moments. The span is one since $\pi_0,\pi_1>0$. Finally $V_r\ge a_{r-1}(H_{r-1}-1)^2\ge2^{-r-1}n_{r-1}^{4}(1-o(1))\to\infty$, and $\Delta_r\to0$, so $v_r\to b=3/16$.
 \end{proof}
 
-\subsection{Proof of \cref{thm:crit}}
+\subsection{Proof of \texorpdfstring{\cref{thm:crit}}{Theorem 1.2}}
 
 Fix $r$ and write $n=n_r$, $N=n-1$, $Q=Q^{(r-1)}$, $A=\supp Q$, $z=Q(0)>1/2$ and $\tau=\sum_{s\ge r}h_s<4n^{-4}$. The law $\pi$ agrees with $Q$ on $A\setminus\{0\}$ and $\pi_0=z-\tau$. Let $\xi_1,\dots,\xi_n$ be independent with law $\pi$ and $\Cond=\{\sum_i\xi_i=n-1\}$. On $\Cond$ every coordinate is at most $n-1<H_r$, and every atom of $\pi$ outside $A\cup\{L_r^-,L_r^+\}$ is at least $H_r$ by \eqref{eq:critsupport} and induction. So on $\Cond$ every coordinate lies in $A$ or equals $L_r^\pm$. Let $J$ be the number of coordinates equal to $L_r^+$ or $L_r^-$.
 
@@ -372,6 +423,20 @@ Combining the three types, the law of $(\#\{i:\xi_i=1\}-nq)/\sqrt n$ given $\Con
 The order of limits is the point of the construction. The law $Q^{(r-1)}$ is fixed before $n_r$ is chosen, and the local limit theorem is applied to that fixed law at a standardised displacement $V_r/(q\Delta_r)$ that is large but fixed; this is why $n_r$ must be taken large enough for the prescribed accuracy $\varepsilon_r$ at that displacement. The regression coefficient of the count of ones on the sum is $q\Delta_r/V_r$, which tends to zero because the variance $V_r$ blows up, and the displacement is chosen as its reciprocal so that the conditional mean is $\mp1$ at every stage. The gates (G1)--(G5) quantify all the uniformity that the diagonal argument needs; no uniform local limit theorem over the stages is used.
 \end{remark}
 
+\section{Balls in boxes}\label{sec:bb}
+
+\begin{proof}[Proof of \cref{thm:bb}]
+Let $0<t\le\rho$ with $\Phi(t)<\infty$, and let $X_1,\dots,X_n$ be independent with law $\pi^t$. For non-negative integers $y_1,\dots,y_n$ with $\sum_iy_i=m$ one has $\prod_i\pi^t_{y_i}=t^m\Phi(t)^{-n}\prod_iw_{y_i}$, so on this set the weights defined by $\pi^t$ and by $w$ are proportional. Hence if $\Prob(\sum_iX_i=m)>0$, then $B_{m,n}$ is defined and has the law of $(X_1,\dots,X_n)$ conditioned on $\sum_iX_i=m$, and the vector $(N_{A_j}(B_{m,n}))_{j\le p}$ has the law of $(\#\{i:X_i\in A_j\})_{j\le p}$ under the same conditioning. We apply \cref{lem:llt}, in its form for the functions $f_j=\Ind_{A_j}$, $j\le p$, with the index $n$ in place of $r$, $N_n=n$ and $k_n=m$. Since $w_0>0$ and $w$ has span one, there is a finite set $F\ni0$ with $w_x>0$ for $x\in F$ and $\gcd F=1$, so that the differences of elements of $F$ have greatest common divisor one.
+
+(a) Let $X_n$ have law $\pi^{\tau_n}$, so that $\E X_n=\Psi(\tau_n)=m/n$ and the lemma applies with $a=0$ once its hypotheses are checked. Since $\Psi$ is continuous and strictly increasing on $(0,\rho)$ with supremum $\nu$, $\Psi(\tau_n)\to\lambda$ implies $\tau_n\to\tau$. The function $\Phi$ is continuous on $[0,\rho)$, and when $\Phi(\rho)<\infty$ it is left-continuous at $\rho$ by monotone convergence; so $\pi^{\tau_n}_k\to\pi^\tau_k$ for every $k$, $X_n\to X$ in distribution with $X$ of law $\pi^\tau$, and $\Prob(X_n=x)\ge c:=\frac12\min_{y\in F}\pi^\tau_y>0$ for $x\in F$ and large $n$. For the uniform integrability, let $t'=(\tau+\rho)/2$ if $\lambda<\nu$ and $\rho<\infty$, $t'=\tau+1$ if $\rho=\infty$, and $t'=\rho$ if $\lambda=\nu$. Then $\tau_n\le t'$ for large $n$, and $\sum_kk^2w_kt'^k<\infty$, for $t'=\rho$ by the assumption $\Var(\pi^\rho)<\infty$. Since $\Phi(\tau_n)\ge w_0$,
+\[
+\E[X_n^2;X_n>K]\le\frac1{w_0}\sum_{k>K}k^2w_kt'^k\longrightarrow0\qquad(K\to\infty)
+\]
+uniformly in large $n$. Now \eqref{eq:llt1} gives $\sqrt n\,\Prob(\sum_iX_i=m)\to(2\pi\Var X)^{-1/2}>0$, so $B_{m,n}$ is defined for large $n$, and the joint form of \eqref{eq:llt2} gives (a): the limit has mean zero, and its covariances $\Cov(\Ind_{A_j}(X),\Ind_{A_l}(X))-\gamma_j(\tau)\gamma_l(\tau)/\Var X$ are the entries of $\Sigma(\tau)$.
+
+(b) Let $X_n=X$ have the fixed law $\pi^\rho$, which has mean $\nu$ and finite variance. The lemma applies with $(m-n\nu)/\sqrt n\to a$, the same set $F$ and $c=\min_{y\in F}\pi^\rho_y$, and gives (b) in the same way.
+\end{proof}
+
 \section{Exact computations}\label{sec:num}
 
 \subsection{The subcritical law}
@@ -386,26 +451,33 @@ For the law of \cref{thm:sub}, the exact partial sums over four stages, with rig
 a_*=0.9999079391570831\ldots,\qquad
 v_*=1.7283757730977\ldots\times10^{-5},
 \]
+\[
+a_{\{0\}}=-0.9999084153295753\ldots,\qquad
+v_{\{0\}}=1.710542585583053\ldots\times10^{-5},
+\]
 each correct to the digits shown. The smallness of $v_*$ has the explanation given after \cref{thm:sub}: if $\xi$ took only the values $0$ and $1$, the count of ones would be a function of the sum and $v_*$ would vanish; $v_*n$ is, to leading order, the variance contributed by the atoms of the earlier stages, $n\sum_{s<r}p_s\big((L_s^-)^2+(L_s^+)^2\big)$, which at $n=n_2$ equals $176^2+208^2=74\,240$.
 
 By \cref{lem:cycle}, $\Prob(|T|=n,\,N_1(T)=m)$ equals $1/n$ times the sum, over all vectors of outdegree counts $(a_k)_{k\ge0}$ with $\sum_ka_k=n$, $\sum_kka_k=n-1$ and $a_1=m$, of the multinomial weights $\binom{n}{(a_k)}\prod_k\pi_k^{a_k}$. At $n=n_1=256$ the only vectors are $a_{208}=1$, $a_1=47$, $a_0=208$; $a_{176}=1$, $a_1=79$, $a_0=176$; and $a_1=255$, $a_0=1$. So $N_1(T_{256})$ takes only the values $47$, $79$ and $255$, with probabilities
 \[
 0.3447441\ldots,\qquad0.6552558\ldots,\qquad1.2\times10^{-142},
 \]
-and $\Prob(|T|=256)=1.886848\ldots\times10^{-12}$. The same three probabilities were obtained by a direct dynamic programme over \L ukasiewicz paths of length $256$ with steps in $\{-1,0,175,207\}$, which does not use \cref{lem:cycle}; the two computations agree to all $60$ digits carried. The asymmetry of the weights at $n=256$ is a finite-size effect: the two targets $k^\pm=n-1-L^\pm$ sit at $-2.4$ and $+2.2$ standard deviations of a binomial sum of $255$ trials, and the local limit theorem is not yet accurate.
+and $\Prob(|T|=256)=1.886848\ldots\times10^{-12}$. On the same three configurations the number of leaves is $208$, $176$ and $1$; the first two values are $256\pi_0\pm16$ to within $2\times10^{-7}$. The same three probabilities were obtained by a direct dynamic programme over \L ukasiewicz paths of length $256$ with steps in $\{-1,0,175,207\}$, which does not use \cref{lem:cycle}; the two computations agree to all $60$ digits carried. The asymmetry of the weights at $n=256$ is a finite-size effect: the two targets $k^\pm=n-1-L^\pm$ sit at $-2.4$ and $+2.2$ standard deviations of a binomial sum of $255$ trials, and the local limit theorem is not yet accurate.
 
 At $n=n_2=2^{32}$ the vectors with one coordinate equal to $L_2^\pm$ are indexed by the numbers $(a_{176},a_{208})$ of stage-one atoms; summing the multinomial weights over $a_{176},a_{208}\le44$ (the omitted terms are smaller by a factor below $10^{-40}$) and bounding the vectors without a stage-two atom by \eqref{eq:bernstein} (with $M_2=256$ they contribute less than $e^{-8\times10^6}$ of the total) gives
 \[
 \Prob(\text{sign }+\mid|T|=n_2)=0.4999613\ldots,\qquad\Prob(\text{sign }-\mid|T|=n_2)=0.5000387\ldots,
 \]
-and, for the conditional laws of $(N_1(T_{n_2})-n_2/4)/\sqrt{n_2}$ given the sign,
+and, for the conditional laws of $(N_1(T_{n_2})-n_2/4)/\sqrt{n_2}$ and of $(N_0(T_{n_2})-n_2\pi_0)/\sqrt{n_2}$ given the sign $\varepsilon$, whose limits are $\Nor(-\varepsilon a_*,v_*)$ and $\Nor(-\varepsilon a_{\{0\}},v_{\{0\}})$,
 \[
-\begin{array}{c|cc|cc}
-\text{sign} & \text{mean} & \text{limit }\mp a_* & \text{variance} & \text{limit }v_*\\ \hline
-+ & -0.9999238 & -0.9999079 & 1.7012\times10^{-5} & 1.7284\times10^{-5}\\
-- & \phantom{-}0.9998921 & \phantom{-}0.9999079 & 1.7559\times10^{-5} & 1.7284\times10^{-5}
+\begin{array}{cc|cc|cc}
+\text{count} & \text{sign} & \text{mean} & \text{limit} & \text{variance} & \text{limit}\\ \hline
+N_1 & + & -0.9999238 & -0.9999079 & 1.7012\times10^{-5} & 1.7284\times10^{-5}\\
+N_1 & - & \phantom{-}0.9998921 & \phantom{-}0.9999079 & 1.7559\times10^{-5} & 1.7284\times10^{-5}\\
+N_0 & + & \phantom{-}0.9999090 & \phantom{-}0.9999084 & 1.6837\times10^{-5} & 1.7105\times10^{-5}\\
+N_0 & - & -0.9999078 & -0.9999084 & 1.7378\times10^{-5} & 1.7105\times10^{-5}
 \end{array}
 \]
+The leaf means have the opposite sign to those of $N_1$ because $\gamma_{\{0\}}<0<\gamma_{\{1\}}$: given the sign $+$, the small coordinates have the smaller sum, hence fewer ones and more zeros.
 Also $\Prob(|T|=n_2)=5.7423273\times10^{-45}$, against the prediction $2C_\sigma n_2^{-9/2}=5.7423273\times10^{-45}$ of \cref{sec:sub}; the first-order corrections to the local limit theorem are odd in the displacement and cancel between the two signs. The number $a_{176}+a_{208}$ of stage-one atoms is approximately Poisson with mean $2$ (its conditional law is $0.135,0.271,0.271,0.180,\dots$), which is the source of the variance $v_*$. \Cref{fig:law} shows the exact law at $n=n_2$ against the Gaussian law of the conjecture.
 
 \begin{figure}[ht]
@@ -441,9 +513,11 @@ Let $\mu$ be subcritical with $\mu_0>0$, $\mu_0+\mu_1<1$, finite variance and no
 
 The regularity in the question holds for $\mu_k\sim ck^{-\beta}$ and more generally for regularly varying tails, and it fails for the laws of this paper. The critical case with infinite variance is more delicate, because the sum of the small coordinates then has non-Gaussian fluctuations of order larger than $\sqrt n$, and \cref{thm:crit} shows that a lacunary tail can again pin that sum; a formulation covering both cases would need to control the local behaviour of $\mu$ at the scale of the fluctuations of the sum.
 
-The examples also bear on Problem 20.2 of \cite{Janson12}. Its second question, whether the degree-count central limit theorem extends to critical laws of infinite variance, is answered in the negative by \cref{thm:crit} as far as unrestricted convergence is concerned; its third question, what happens for $0\le\nu<1$, is answered in the same sense by \cref{thm:sub}. They say nothing about the first question, which concerns the joint convergence and the convergence of moments in \cite[(20.7)--(20.9)]{Janson12} for critical laws of finite variance: the one-dimensional statement there is Kolchin's, with variance $\mu_d(1-\mu_d-(d-1)^2\mu_d/\sigma^2)$. That variance tends to $\mu_d(1-\mu_d)$ as $\sigma^2\to\infty$, which is why the conjecture predicts the latter for infinite variance; for $d=1$ the two agree exactly.
+The examples also bear on Problems 21.2--21.4 of \cite{Janson12}. The second question of Problem 21.2, whether the degree-count central limit theorem extends to critical laws of infinite variance, is answered in the negative by \cref{thm:crit} as far as unrestricted convergence is concerned; its third question, what happens for $0\le\nu<1$, is answered in the same sense by \cref{thm:sub}. The first question concerns the joint convergence and the moment estimates \cite[(21.7)--(21.9)]{Janson12} for critical laws of finite variance without further moment conditions. The joint convergence is proved by Janson \cite[Example 2.2]{Janson16} and is also the case $m=n-1$ of \cref{thm:bb}; the moment estimates are not addressed here. The one-dimensional statement is Kolchin's, with variance $\mu_d(1-\mu_d-(d-1)^2\mu_d/\sigma^2)$. That variance tends to $\mu_d(1-\mu_d)$ as $\sigma^2\to\infty$, which is why the conjecture predicts the latter for infinite variance; for $d=1$ the two agree exactly.
 
-Counterexamples of a different kind are known for other tree statistics. Rakotoniaina and Ralaivaosaona \cite{RR} prove asymptotic normality for counts of a fixed tree as a general subtree of a critical conditioned Galton--Watson tree under a moment condition, and give two critical offspring laws violating it for which the variance of the count is no longer of order $n$, so that the fluctuations are not Gaussian at that scale; Janson \cite{Janson21} treats fringe subtree counts with finite variance and no further moment condition. The failure in \cref{thm:sub,thm:crit} is of a different nature: the centering $n\mu_A$ and the scale $\sqrt n$ of the conjecture are correct, the normalised counts are tight, and the limit along $n_r$ exists and simply is not Gaussian.
+Problem 21.3 asks for the same results for balls in boxes. \Cref{thm:bb} gives the joint central limit theorem when $0<\lambda<\nu$, the case that \cite{Janson12} expects to follow from the methods of \cite{Janson01}, and at $\lambda=\nu$ under a second moment condition, for $m<n\nu$ and for $(m-n\nu)/\sqrt n\to a\in\R$; read for $B_{n-1,n}$, \cref{thm:sub,cor:sub,thm:crit} show that it fails in general when $\lambda>\nu$, and when $\lambda=\nu$ with $\Var(\pi^\rho)=\infty$. Problem 21.4 asks for the same results for the fringe subtree counts of \cite[Theorem 7.12]{Janson12}, the numbers of vertices whose subtree is a given tree. For critical laws of finite variance their joint asymptotic normality is proved by Janson \cite[Corollary 1.8]{Janson16}, with no further moment condition. The number of leaves is the fringe subtree count of the tree with one vertex, so \cref{cor:sub} shows that the extension fails in general for subcritical laws without exponential moment. The critical case with infinite variance is not covered: \cref{thm:crit} concerns $N_1$ only.
+
+Counterexamples of a different kind are known for other tree statistics. Rakotoniaina and Ralaivaosaona \cite{RR} prove asymptotic normality for counts of a fixed tree as a general subtree of a critical conditioned Galton--Watson tree under a moment condition, and give two critical offspring laws violating it for which the variance of the count is no longer of order $n$, so that the fluctuations are not Gaussian at that scale. The failure in \cref{thm:sub,thm:crit} is of a different nature: the centering $n\mu_A$ and the scale $\sqrt n$ of the conjecture are correct, the normalised counts are tight, and the limit along $n_r$ exists and simply is not Gaussian.
 
 \section*{Funding}
 The research presented in this paper was supported by the European Research Council (ERC) under the European Union's Horizon Europe research and innovation programme (grant agreement No.~101041711), by the Simons Foundation as part of the Collaboration on the Mathematical and Scientific Foundations of Deep Learning, by Heights Labs, by Convex Nexus Capital, by the Israel Science Foundation (grant number 2258/19), and by the Israel Science Foundation (ISF Grant 4101/25).
@@ -452,7 +526,7 @@ The research presented in this paper was supported by the European Research Coun
 The author holds equity in Heights Labs and in Convex Nexus Capital and has a management role at Convex Nexus Capital. These entities are included in the funding declaration above.
 
 \section*{Declaration of generative AI and AI-assisted technologies}
-This paper is a product of an ongoing project on the use of AI systems for research mathematics, provisionally called Math Brain, which studies how to make such systems better at solving open problems; the project and its tooling will be released publicly in due course. The mathematics, the literature search, the computations, the Lean formalisation and the text were produced by AI systems (Codex with GPT-6 Astra, OpenAI; Claude Fable 5.1 and Claude Opus 5, Anthropic), working from the conjecture in \cite{Thevenin} and Problem 20.2 of \cite{Janson12}; every claim, citation and computation was re-derived independently in adversarial review by the same systems. The arguments have not been refereed by a human mathematician. The author set the goals of the project, commissioned and directed the work and approved the release; the author did not carry out the mathematics, the verification, the computations or the writing, and takes responsibility for the decision to publish.
+The paper comes out of Math Brain, an ongoing project on the use of AI systems for research mathematics. In September 2026 AI systems (Codex with GPT-6 Astra, OpenAI; Claude Fable 5.1 and Claude Opus 5, Anthropic), working from the conjecture in \cite{Thevenin} and Problem 21.2 of \cite{Janson12}, found the constructions of \cref{thm:sub,thm:crit}, wrote their proofs, the computations of \cref{sec:num} and the Lean file, and searched the literature. In October 2026 Claude Opus 5.5 (Anthropic) proved \cref{lem:llt} in its present generality, \cref{cor:sub} and \cref{thm:bb}, searched the literature on Problems 21.3 and 21.4 of \cite{Janson12}, extended the computations to the number of leaves, and wrote the present text. The arguments have not been refereed by a human mathematician. The author directed the work and is responsible for the content of the paper and for decisions concerning its dissemination.
 
 \section*{Data and code availability}
 The code for the exact computations of \cref{sec:num}, the Lean file with its build log and axiom report, and the \LaTeX{} source are available at
@@ -460,7 +534,7 @@ The code for the exact computations of \cref{sec:num}, the Lean file with its bu
 \url{https://github.com/yspennstate/non-gaussian-degree-counts}
 \end{center}
 
-\begin{thebibliography}{9}
+\begin{thebibliography}{99}
 
 \bibitem{AD} R. Abraham and J.-F. Delmas, Local limits of conditioned Galton--Watson trees: the condensation case, \emph{Electron. J. Probab.} 19 (2014), no. 56, 1--29.
 
@@ -470,9 +544,11 @@ The code for the exact computations of \cref{sec:num}, the Lean file with its bu
 
 \bibitem{DM} A. Dvoretzky and Th. Motzkin, A problem of arrangements, \emph{Duke Math. J.} 14 (1947), 305--313.
 
+\bibitem{Janson01} S. Janson, Moment convergence in conditional limit theorems, \emph{J. Appl. Probab.} 38 (2001), 421--437.
+
 \bibitem{Janson12} S. Janson, Simply generated trees, conditioned Galton--Watson trees, random allocations and condensation, \emph{Probab. Surv.} 9 (2012), 103--252.
 
-\bibitem{Janson21} S. Janson, On general subtrees of a conditioned Galton--Watson tree, \emph{Electron. Commun. Probab.} 26 (2021), paper no. 25, 12 pp.
+\bibitem{Janson16} S. Janson, Asymptotic normality of fringe subtrees and additive functionals in conditioned Galton--Watson trees, \emph{Random Structures Algorithms} 48 (2016), 57--101.
 
 \bibitem{JS} T. Jonsson and S. \"O. Stef\'ansson, Condensation in nongeneric trees, \emph{J. Stat. Phys.} 142 (2011), 277--313.
 

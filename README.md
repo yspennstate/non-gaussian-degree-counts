@@ -1,6 +1,6 @@
 # Non-Gaussian fluctuations of degree counts in conditioned Galton-Watson trees
 
-Companion material for the paper of the same title (Y. Shmalo, September 2026). Thévenin (Electron. J. Probab. 25,
+Companion material for the paper of the same title (Y. Shmalo, 2026). Thévenin (Electron. J. Probab. 25,
 2020, Section 6.2) proved a central limit theorem for the numbers of vertices of fixed outdegrees in a subcritical
 Galton-Watson tree conditioned to have n vertices when the offspring law has a power-law tail, and conjectured that
 it extends to every subcritical law without exponential moment and every critical law with infinite variance. The
@@ -8,15 +8,21 @@ paper gives two offspring laws for which the extension fails: an explicit subcri
 and no exponential moment, and a critical law with infinite variance. For both, along a sequence of sizes, the
 centred and normalised number of vertices of outdegree one converges to an equal mixture of two Gaussian laws with
 means of opposite sign, because the vertex of macroscopic degree takes one of two degrees 2 sqrt(n) apart with
-probability tending to one half each.
+probability tending to one half each. For the subcritical law the same holds for the number of vertices with
+outdegree in any set A with 0 < pi(A) < 1, in particular for the number of leaves. The paper also proves a joint
+central limit theorem for the box counts of balls-in-boxes models when the limiting density of balls is below the
+critical density, and at the critical density under a second moment condition when the number of balls exceeds
+its critical value by at most O(sqrt(n)). These results bear on Problems 21.2-21.4 of Janson's survey of simply
+generated trees (Probab. Surv. 9, 2012).
 
 Contents
 
 - `paper/` the LaTeX source and the compiled PDF.
 - `numerics/degree_counts.py` exact computations for the subcritical law: the stages and their integrality, the
-  constants nu, sigma^2, a_*, v_* with rigorous tail enclosures, the exact law of the number of degree-one
-  vertices at n = 256 (computed both by a dynamic programme over Lukasiewicz paths and by the conditioned
-  multinomial formula) and at n = 2^32 (mixture weights, conditional means and variances against the limit); and
+  constants nu, sigma^2, a_*, v_* and the leaf constants a_{0}, v_{0} with rigorous tail enclosures, the exact law
+  of the number of degree-one vertices at n = 256 (computed both by a dynamic programme over Lukasiewicz paths and
+  by the conditioned multinomial formula) and at n = 2^32 (mixture weights, conditional means and variances against
+  the limit, for the degree-one vertices and for the leaves); and
   the first stage of the critical construction (the admissibility gates scanned over n = 2^l, first passed at
   n = 2^17). `numerics/results.md` is its output.
 - `figures/thevenin_n2_law.pdf` the exact law at n = 2^32 against the Gaussian law of the conjecture.
