@@ -35,6 +35,7 @@
 \email{yitzchak.shmalo@gmail.com}
 \date{\today}
 
+\usepackage{xurl}
 \begin{document}
 
 \begin{abstract}
@@ -525,6 +526,9 @@ The research presented in this paper was supported by the European Research Coun
 \section*{Declaration of competing interest}
 The author holds equity in Heights Labs and in Convex Nexus Capital and has a management role at Convex Nexus Capital. These entities are included in the funding declaration above.
 
+\section*{Acknowledgments}
+This work was done by multiple AI agents, Claude (Anthropic) and Codex (OpenAI), connected to Math Brain~\cite{MathBrainRepo} and working together inside the Brain framework~\cite{BrainFramework}, a shared, persistent memory in which the agents record claims, proofs, failed attempts and methods, retrieve one another's results, coordinate who works on what, and audit each other's work. For more on the details behind the Brain and Math Brain, see the Math Brain paper~\cite{MathBrainPaper}, the Math Brain repository~\cite{MathBrainRepo} and the Brain framework repository~\cite{BrainFramework}.
+
 \section*{Declaration of generative AI and AI-assisted technologies}
 The paper comes out of Math Brain, an ongoing project on the use of AI systems for research mathematics. In September 2026 AI systems (Codex with GPT-6 Astra, OpenAI; Claude Fable 5.1 and Claude Opus 5, Anthropic), working from the conjecture in \cite{Thevenin} and Problem 21.2 of \cite{Janson12}, found the constructions of \cref{thm:sub,thm:crit}, wrote their proofs, the computations of \cref{sec:num} and the Lean file, and searched the literature. In October 2026 Claude Opus 5.5 (Anthropic) proved \cref{lem:llt} in its present generality, \cref{cor:sub} and \cref{thm:bb}, searched the literature on Problems 21.3 and 21.4 of \cite{Janson12}, extended the computations to the number of leaves, and wrote the present text. The arguments have not been refereed by a human mathematician. The author directed the work and is responsible for the content of the paper and for decisions concerning its dissemination.
 
@@ -533,6 +537,8 @@ The code for the exact computations of \cref{sec:num}, the Lean file with its bu
 \begin{center}
 \url{https://github.com/yspennstate/non-gaussian-degree-counts}
 \end{center}
+
+The paper is part of the Math Brain project, whose public repository is \url{https://github.com/yspennstate/math-brain-public}~\cite{MathBrainRepo}.
 
 \begin{thebibliography}{99}
 
@@ -561,6 +567,12 @@ The code for the exact computations of \cref{sec:num}, the Lean file with its bu
 \bibitem{RR} F. Rakotoniaina and D. Ralaivaosaona, Asymptotic normality for general subtree counts in conditioned Galton--Watson trees, arXiv:2603.08076 (2026).
 
 \bibitem{Thevenin} P. Th\'evenin, Vertices with fixed outdegrees in large Galton--Watson trees, \emph{Electron. J. Probab.} 25 (2020), paper no. 64, 25 pp.; arXiv:1812.07365.
+
+\bibitem{MathBrainRepo} Y.~Shmalo, \emph{Math Brain: public snapshot, code and tests}, 2026, \url{https://github.com/yspennstate/math-brain-public}.
+
+\bibitem{MathBrainPaper} Y.~Shmalo, \emph{Math Brain: shared, auditable memory for multi-agent mathematical research}, October 2026, \url{https://github.com/yspennstate/math-brain-public/tree/main/papers/math-brain-2026-10-24}.
+
+\bibitem{BrainFramework} Y.~Shmalo, \emph{Brain Framework}, public software repository, 2026, \url{https://github.com/yspennstate/brain-framework-public}.
 
 \end{thebibliography}
 
